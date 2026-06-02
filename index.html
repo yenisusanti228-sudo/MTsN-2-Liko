@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pengumuman Kelulusan MTsN 2 Lima Puluh Kota</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f2f5f9;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:800px;
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.header{
+    background:linear-gradient(135deg,#006400,#0f9d58);
+    color:white;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.header h1{
+    font-size:42px;
+    font-weight:700;
+}
+
+.header h2{
+    margin-top:10px;
+    font-size:24px;
+    font-weight:400;
+}
+
+.header p{
+    margin-top:10px;
+}
+
+.content{
+    padding:40px 30px;
+}
+
+.info{
+    background:#f8f9fa;
+    border-left:5px solid #0f9d58;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:30px;
+    line-height:1.8;
+}
+
+input{
+    width:100%;
+    padding:16px;
+    border:2px solid #ddd;
+    border-radius:12px;
+    font-size:16px;
+    margin-bottom:20px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#0f9d58;
+}
+
+button{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    background:#0f9d58;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#087443;
+}
+
+.hasil{
+    display:none;
+    margin-top:30px;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.lulus{
+    background:#e8f5e9;
+    border:3px solid #2e7d32;
+    color:#1b5e20;
+}
+
+.gagal{
+    background:#ffebee;
+    border:3px solid #c62828;
+    color:#b71c1c;
+}
+
+.hasil h1{
+    font-size:42px;
+    margin:15px 0;
+}
+
+.data{
+    margin-top:20px;
+    text-align:left;
+    line-height:2;
+    font-size:18px;
+}
+
+.footer{
+    background:#f1f1f1;
+    text-align:center;
+    padding:20px;
+    color:#666;
+}
+
+@media(max-width:600px){
+
+    .header h1{
+        font-size:30px;
+    }
+
+    .hasil h1{
+        font-size:28px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>PENGUMUMAN</h1>
+
+        <h2>KELULUSAN KELAS IX</h2>
+
+        <p>MTsN 2 Lima Puluh Kota</p>
+
+        <p>Tahun Pelajaran 2025/2026</p>
+
+    </div>
+
+    <div class="content">
+
+        <div class="info">
+
+            <b>Petunjuk:</b><br>
+
+            1. Masukkan NISN siswa.<br>
+            2. Klik tombol CEK KELULUSAN.<br>
+            3. Hasil kelulusan akan tampil otomatis.
+
+        </div>
+
+        <input type="text" id="nisn" placeholder="Masukkan NISN">
+
+        <button onclick="cekKelulusan()">
+            CEK KELULUSAN
+        </button>
+
+        <div id="hasil" class="hasil"></div>
+
+    </div>
+
+    <div class="footer">
+
+        © 2026 MTsN 2 Lima Puluh Kota
+
+    </div>
+
+</div>
+
+<script>
+
+const siswa = {
+
+"0102698428": {nama:"Agusti Putra Raditya", status:"LULUS"},
+"0107088611": {nama:"Alfajri Muhammad Dhivo", status:"LULUS"},
+"0118193829": {nama:"Arya Hadhiaksa", status:"LULUS"},
+"0101701044": {nama:"Belia Raisya", status:"LULUS"},
+"0096639672": {nama:"Bunga Nirwana", status:"LULUS"},
+"0093290870": {nama:"Dimas Langit Ramadhan", status:"LULUS"},
+"0106150699": {nama:"Farhan Pratama", status:"LULUS"},
+"0119167803": {nama:"Gedita Amelinda", status:"LULUS"},
+"0111246293": {nama:"Habibi Azzaky", status:"LULUS"},
+"0109001994": {nama:"Jihan Lorendra Safitri", status:"LULUS"},
+"0105793328": {nama:"Khairul Azzam", status:"LULUS"},
+"0096014358": {nama:"Lovellyta Apriani", status:"LULUS"},
+"0119873770": {nama:"Meisya Djah Rosita", status:"LULUS"},
+"0106298711": {nama:"Mohammad Ibra", status:"LULUS"},
+"0104187167": {nama:"Nadine Azkadina Vhedeviana", status:"LULUS"},
+"0119018372": {nama:"Naysa Fajri Nuzula", status:"LULUS"},
+"0109148369": {nama:"Nikita Hanny Aulya", status:"LULUS"},
+"0101252679": {nama:"Novita Adella", status:"LULUS"},
+"0101986320": {nama:"Rahmatul Azzam", status:"LULUS"},
+"0117084084": {nama:"Selvi Utami Putri", status:"LULUS"},
+"0103547726":{"nama":"Arifa Sahira","status":"LULUS"},
+"0103560538":{"nama":"Fahira Wijaya","status":"LULUS"},
+"0117329968":{"nama":"Finta Anjelina","status":"LULUS"},
+"0101997825":{"nama":"Hafiz Arrahman","status":"LULUS"},
+"0102024130":{"nama":"Hana Lailatul","status":"LULUS"},
+"0102430233":{"nama":"Hardan Diva Ramadhan","status":"LULUS"},
+"0115147052":{"nama":"Juniardi Muqhny","status":"LULUS"},
+"0107326484":{"nama":"Latasya Oktavia","status":"LULUS"},
+"0119628943":{"nama":"Lutfia Fauziana","status":"LULUS"},
+"0107821471":{"nama":"Magfiratul Atifa","status":"LULUS"},
+"0101878969":{"nama":"Mischa Anjeli Agustina","status":"LULUS"},
+"0113896398":{"nama":"Muhammad Nafillah","status":"LULUS"},
+"0111709295":{"nama":"Muhammad Rafi","status":"LULUS"},
+"0105684443":{"nama":"Muhammad Zikra","status":"LULUS"},
+"0113147611":{"nama":"Ragil Juanda Putra","status":"LULUS"},
+"0112855067":{"nama":"Rifky Rahman","status":"LULUS"},
+"0116445710":{"nama":"Riski Ramadhan","status":"LULUS"},
+"0095988176":{"nama":"Risva Febrianti","status":"LULUS"},
+"0103919210":{"nama":"Riva Lina Agustin","status":"LULUS"},
+"0102111152":{"nama":"Thania Saputri","status":"LULUS"},
+"0113981505":{"nama":"Zahira Mutiahul Fitria","status":"LULUS"},
+"3119656546":{"nama":"Zecky Darjat Maulana","status":"LULUS"},
+"0109027546":{"nama":"Abelia Syakila","status":"LULUS"},
+"0118243854":{"nama":"Agiel Kurniawal Pratama","status":"LULUS"},
+"0093481778":{"nama":"Alfian Marzuqi","status":"LULUS"},
+"0083366748":{"nama":"Dita Sri Ayu Kendari","status":"LULUS"},
+"0112660329":{"nama":"Divo Zilfa Putra","status":"LULUS"},
+"0109350386":{"nama":"Fadhlulnaqiy Rama Fesi","status":"LULUS"},
+"0119973996":{"nama":"Laura Assyifa Putri B.","status":"LULUS"},
+"0108368541":{"nama":"M. Dafa Ramadhan","status":"LULUS"},
+"0108449038":{"nama":"MHD. Daffha Al Qadri","status":"LULUS"},
+"0107048203":{"nama":"Muhammad Al Khadaffi","status":"LULUS"},
+"0114591101":{"nama":"Muhammad Hanafi Antoni","status":"LULUS"},
+"0103805400":{"nama":"Mulia Rahma Efendi","status":"LULUS"},
+"0113131798":{"nama":"Nayla Apriani","status":"LULUS"},
+"0108366469":{"nama":"Nur Lativa","status":"LULUS"},
+"0117345737":{"nama":"Nurlathifa Ramadhan","status":"LULUS"},
+"0106945074":{"nama":"Oxsha Yulia Alfondri","status":"LULUS"},
+"0109644984":{"nama":"Rahmatul Aiga","status":"LULUS"},
+"0113085408":{"nama":"Rahmi Azzahra","status":"LULUS"},
+"0105060971":{"nama":"Shafa Khairiyyah","status":"LULUS"},
+"0105572665":{"nama":"Sri Andini","status":"LULUS"},
+"0108349811":{"nama":"Willy Matsnawi","status":"LULUS"},
+"0104199380":{"nama":"Yuda Oktarian","status":"LULUS"},
+"0117169210":{"nama":"Agiev Kurniawan Pratama","status":"LULUS"},
+"0103120651":{"nama":"Faridho Ramadhan","status":"LULUS"},
+"0107547290":{"nama":"Flora Angel Ina Adha","status":"LULUS"},
+"0101765302":{"nama":"Ibnu Rajab Afsani","status":"LULUS"},
+"0117753323":{"nama":"Kenzie Raditya Najib","status":"LULUS"},
+"0105343566":{"nama":"Keyla Rahmatuzzahra","status":"LULUS"},
+"0112661957":{"nama":"Khalifah Cerlova Linovzky","status":"LULUS"},
+"3110824811":{"nama":"Khalis Qosid Al-Ghifari","status":"LULUS"},
+"0106095450":{"nama":"Khalisa Adelia Salsabila","status":"LULUS"},
+"0103360215":{"nama":"Lafitcie Darlien Agnyna","status":"LULUS"},
+"0105155860":{"nama":"Marwa Dwi Ayfa","status":"LULUS"},
+"0104216838":{"nama":"Nur Muharani","status":"LULUS"},
+"0091138953":{"nama":"Nurul Ashyfa","status":"LULUS"},
+"0117210367":{"nama":"Nurul Hidayah Syaidina","status":"LULUS"},
+"0114790953":{"nama":"Rafky Mudzaki","status":"LULUS"},
+"0106938923":{"nama":"Raif Akbar","status":"LULUS"},
+"0104062337":{"nama":"Ridho Dinata","status":"LULUS"},
+"0102917631":{"nama":"Septia Andini","status":"LULUS"},
+"0109400613":{"nama":"Viza Yulia","status":"LULUS"},
+"0117943794":{"nama":"Zhivana Letisa","status":"LULUS"},
+"0109724870":{"nama":"Abdul Afif","status":"LULUS"},
+"0113422823":{"nama":"Azizatul Hakima","status":"LULUS"},
+"0105107998":{"nama":"Dinda Regina Puteri","status":"LULUS"},
+"3104371441":{"nama":"Egi Ramadani","status":"LULUS"},
+"0118957344":{"nama":"Hanum Afiza Mahiska","status":"LULUS"},
+"0115025618":{"nama":"Kamila Aulya","status":"LULUS"},
+"0104656643":{"nama":"Kholbiansyah Pratama","status":"LULUS"},
+"0101193064":{"nama":"Mei Shafa Putri","status":"LULUS"},
+"0108444853":{"nama":"Miftahul Hafiza","status":"LULUS"},
+"0091945522":{"nama":"Muhammad Adif","status":"LULUS"},
+"0117169145":{"nama":"Paramita Jingga El Pacino","status":"LULUS"},
+"0112417859":{"nama":"Rasyid Hermansyah","status":"LULUS"},
+"0114204108":{"nama":"Robbyl Maulana","status":"LULUS"},
+"0103847938":{"nama":"Robi Rizandi","status":"LULUS"},
+"0102213431":{"nama":"Salwa Salsabila","status":"LULUS"},
+"0104099173":{"nama":"Septian Arash","status":"LULUS"},
+"0114284509":{"nama":"Valen Evido","status":"LULUS"},
+"0101355040":{"nama":"Zahira Nafizah","status":"LULUS"}
+};
+
+
+function cekKelulusan(){
+
+    let nisn = document.getElementById("nisn").value;
+
+    let hasil = document.getElementById("hasil");
+
+    if(siswa[nisn]){
+
+        hasil.className = "hasil lulus";
+
+        hasil.style.display = "block";
+
+        hasil.innerHTML = `
+            <h2>SELAMAT</h2>
+            <h1>LULUS</h1>
+
+            <div class="data">
+
+                <p><b>NISN :</b> ${nisn}</p>
+
+                <p><b>Nama :</b> ${siswa[nisn].nama}</p>
+
+                <p><b>Status :</b> ${siswa[nisn].status}</p>
+
+            </div>
+        `;
+
+    }else{
+
+        hasil.className = "hasil gagal";
+
+        hasil.style.display = "block";
+
+        hasil.innerHTML = `
+            <h2>DATA TIDAK DITEMUKAN</h2>
+            <p>Periksa kembali NISN yang dimasukkan.</p>
+        `;
+    }
+}
+
+</script>
+
+</body>
+</html>
+```
